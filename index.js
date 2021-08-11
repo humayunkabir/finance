@@ -3,9 +3,16 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const port = 3001;
+const port = 3000;
 
 app.use(cors());
+
+app.get('/', (req, res) => {
+  res.send({
+    status: 200,
+    message: 'Hello from Finance App',
+  });
+});
 
 app.get('/:type/:symbols', (req, res) => {
   if (['quote', 'historical'].includes(req.params.type)) {
