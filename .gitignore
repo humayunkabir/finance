@@ -30,3 +30,7 @@ benchmarks/graphs
 .idea
 .project
 .vscode
+
+# Environment
+.env
+.env.local
