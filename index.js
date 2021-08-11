@@ -32,6 +32,13 @@ app.get('/:type/:symbols', (req, res) => {
   }
 });
 
+app.get('*', (req, res) => {
+  res.status(404).send({
+    status: 404,
+    message: 'Not Found!',
+  });
+});
+
 app.listen(port, () => {
   console.log(`Finance app listening at http://localhost:${port}`);
 });
