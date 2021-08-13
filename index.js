@@ -1,6 +1,7 @@
 const yahooFinance = require('yahoo-finance');
 const express = require('express');
 const cors = require('cors');
+const Axios = require('axios');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +13,14 @@ app.get('/', (req, res) => {
     status: 200,
     message: 'Hello from Finance App',
   });
+});
+
+app.get('/search', (req, res) => {
+  Axios.get('https://query2.finance.yahoo.com/v1/finance/search', {
+    params: req.query,
+  })
+    .then(({ data }) => res.send(data))
+    .catch((err) => res.status(404).send(err));
 });
 
 app.get('/:type/:symbols', (req, res) => {
