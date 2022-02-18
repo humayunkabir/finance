@@ -24,11 +24,16 @@ app.get('/search', (req, res) => {
 });
 
 app.get('/:type/:symbols', (req, res) => {
-  if (['quote', 'historical'].includes(req.params.type)) {
+  if (['quote', 'historical', 'snapshot'].includes(req.params.type)) {
     const symbols = req.params.symbols.split(',');
+    const modules = req.query.modules?.split(',');
+    const fields = req.query.fields?.split(',');
+
     const options = {
       ...(symbols.length ? { symbols } : { symbol: symbols[0] }),
       ...req.query,
+      ...(!modules || { modules }),
+      ...(!fields || { fields }),
     };
     yahooFinance[req.params.type](options)
       .then((quotes) => res.send(quotes))
