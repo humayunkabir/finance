@@ -41,12 +41,13 @@ app.get('/:type/:symbols', (req, res) => {
   } else {
     res.status(400).send({
       status: 400,
-      message: "Bad Request: Type must be one of 'quote' or 'historical'!",
+      message:
+        "Bad Request: Type must be one of 'quote', 'historical', or 'snapshot'!",
     });
   }
 });
 
-app.get('*', (req, res) => {
+app.get('*', (_, res) => {
   res.status(404).send({
     status: 404,
     message: 'Not Found!',
